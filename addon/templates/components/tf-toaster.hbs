@@ -1,0 +1,6 @@
+{{#each toast.messages as |toast|}}
+  {{#tf-toast class="tf-toast"}}
+    {{toast.message}}
+    <div class="close-x" {{action 'onDismiss'}}>{{'X'}}</div>
+  {{/tf-toast}}
+{{/each}}
