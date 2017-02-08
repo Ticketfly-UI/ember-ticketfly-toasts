@@ -1,27 +1,34 @@
-# ember-ticketfly-toasts
+# Ember Ticketfly Toasts
 
-This README outlines the details of collaborating on this Ember addon.
+This Ember addon provides the **toasts** and **toast outlet** components and the **toast service** of the Ticketfly UI library.
 
-## Installation
+## Usage
 
-* `git clone <repository-url>` this repository
-* `cd ember-ticketfly-toasts`
-* `npm install`
-* `bower install`
+#### Toast Component
 
-## Running
+The toast component renders a single toast on the page. Pass `type` and/or `message` attributes, and `onDismiss` or `onClick` actions to configure the **toast category**. You will rarely, if ever, use the `tf-toast` component, but would use the `tf-toast-service` instead.
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+**Template:**
+```hbs
+{{!-- Inline form --}}
+{{tf-toast type='positive' message="Positive alert message." onClick=(action "myAction")}}
 
-## Running Tests
+{{!--Block form--}}
+{{#tf-toast type='neutral'}}Neutral alert message.{{/tf-toast}}
+```
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+**Resulting HTML:**
+```html
+<div class="tf-toast tf-toast--positive">Positive alert message.</div>
 
-## Building
+<div class="tf-toast tf-toast--neutral">Neutral alert message.</div>
+```
 
-* `ember build`
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+#### Toast Outlet
+```hbs
+{{#each flashMessages.queue as |flash|}}
+  {{#flash-message flash=flash as |component flash| }}
+    <div>{{flash.message}}<i class="tf-x"></i></div>
+  {{/flash-message}}
+{{/each}}
+```
